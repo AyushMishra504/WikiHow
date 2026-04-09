@@ -1,0 +1,136 @@
+/* Right panel — minimizable, top-right */
+.graph-right-panel {
+  position: fixed;
+  right: 1.5rem;
+  top: 5rem;
+  width: 240px;
+  z-index: 25;
+  pointer-events: auto;
+  border: 1px solid rgba(196,168,130,0.18);
+  background: rgba(26,26,26,0.84);
+  backdrop-filter: blur(14px);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.panel-header:hover {
+  background: rgba(196,168,130,0.05);
+}
+
+.panel-header-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  color: rgba(196,168,130,0.6);
+  text-transform: uppercase;
+}
+
+.panel-minimize-btn {
+  background: none;
+  border: none;
+  color: rgba(196,168,130,0.4);
+  font-size: 0.7rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.panel-minimize-btn:hover { color: #c4a882; }
+
+.panel-body {
+  padding: 0 1rem 1rem;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.panel-body.collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding-bottom: 0;
+  pointer-events: none;
+}
+
+.panel-body.expanded {
+  max-height: 400px;
+  opacity: 1;
+}
+
+.panel-section { margin-bottom: 1rem; }
+
+.panel-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  color: rgba(196,168,130,0.5);
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.panel-value-large {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: #c4a882;
+}
+
+.panel-connections-list { max-height: 180px; overflow-y: auto; }
+
+.panel-connection {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.28rem 0.4rem;
+  border-radius: 6px;
+  color: rgba(196,168,130,0.6);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.panel-connection:hover {
+  color: #f0ebe3;
+  background: rgba(196,168,130,0.08);
+}
+
+.panel-connection-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #c4a882;
+  flex-shrink: 0;
+}
+
+/* Root/Current topic labels — bottom right */
+.root-topic-display {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 5rem;
+  z-index: 25;
+  text-align: right;
+  pointer-events: none;
+}
+
+.root-topic-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  color: rgba(196,168,130,0.5);
+  text-transform: uppercase;
+}
+
+.root-topic-value {
+  margin-top: 0.3rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: #c4a882;
+  font-style: italic;
+}

@@ -2,9 +2,11 @@ import { useEffect, useRef } from "react";
 import "../styles/Landing.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { useNavigate } from "react-router-dom"; 
 
 function Landing() {
   const scrollBlurRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -593,10 +595,10 @@ function Landing() {
 Transforming curiosity into motion — each node a thought, each connection a journey through ideas.          </p>
 
           <div className="hero-actions">
-            <a href="#" className="btn-main">
+            <a href="#" className="btn-main" onClick={() => navigate('/explore')}>
               Start Diving <span className="btn-arrow">→</span>
             </a>
-            <a href="#" className="btn-ghost">How We Think</a>
+            <a href="#scroll-content" className="btn-ghost">Learn More</a>
           </div>
         </div>
 
@@ -617,9 +619,8 @@ Transforming curiosity into motion — each node a thought, each connection a jo
       />
 
       {/* --- Scrollable Page Wrapper Content --- */}
-      {/* --- Scrollable Page Wrapper Content --- */}
       <div className="scroll-wrapper">
-        <div className="scroll-content">
+        <div className="scroll-content" id="scroll-content">
           <h2 className="scroll-title">
             The Essence
           </h2>
@@ -634,7 +635,7 @@ Transforming curiosity into motion — each node a thought, each connection a jo
           {/* CTA */}
           <div className="scroll-cta-group">
             <button
-              onClick={() => window.location.href = '/explore'} // change to your route
+              onClick={() => navigate('/explore')} 
               className="scroll-btn"
             >
               Get Started →

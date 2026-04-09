@@ -1,0 +1,12 @@
+.footer-overlay {
+  position: fixed; bottom: 0; left: 0; right: 0; padding: 1.5rem 2.5rem; display: flex; justify-content: space-between;
+  align-items: flex-end; background: linear-gradient(to top, rgba(14,14,14,0.7) 0%, transparent 100%);
+  z-index: 20; pointer-events: none;
+}
+.footer-info { font-size: 0.75rem; color: rgba(196,168,130,0.35); line-height: 1.6; font-weight: 300; }
+.footer-stats {
+  display: flex; align-items: center; gap: 0.85rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.12em; text-transform: uppercase; color: rgba(196,168,130,0.5);
+}
+.footer-stat-value { color: #c4a882; }
+.footer-stat-divider { width: 1px; height: 14px; background: rgba(196,168,130,0.2); display: inline-block; }

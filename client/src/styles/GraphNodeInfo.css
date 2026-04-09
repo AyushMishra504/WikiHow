@@ -1,0 +1,38 @@
+/* Node info — bottom left, above footer, doesn't crowd center */
+.graph-node-info {
+  position: fixed;
+  left: 1.5rem;
+  bottom: 5rem;
+  width: 200px;
+  z-index: 25;
+  pointer-events: auto;
+  background: rgba(26,26,26,0.84);
+  border: 1px solid rgba(196,168,130,0.18);
+  backdrop-filter: blur(14px);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.node-info-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  color: rgba(196,168,130,0.5);
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.node-info-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: #c4a882;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.node-info-content {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(196,168,130,0.7);
+  line-height: 1.5;
+}
