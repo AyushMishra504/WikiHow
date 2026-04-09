@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import { knowledgeDB, EXAMPLES, RANDOM_TOPICS } from "../utils/knowledge";
 import Graph from "../components/Graph";
+import Search from "../components/Search";
 import "../styles/Explore.css";
 
 // ── Knowledge DB Fetcher ──────────────────────────────────────────────────────────────
@@ -68,13 +69,10 @@ export default function Explore() {
             </p>
           </div>
           <div className="search-container">
-            <div className="search-bar">
-              <span className="search-icon">⌕</span>
-              <input className="search-input" value={query} onChange={e=>setQuery(e.target.value)} onKeyDown={e=>e.key==="Enter"&&handleSearch()} placeholder="Type any topic: Quantum Physics, Renaissance, DNA" />
-              <button className="search-btn" onClick={()=>handleSearch()}>
-                Explore
-              </button>
-            </div>
+            <Search 
+              onSearch={handleSearch} 
+              placeholder="Type any topic: Quantum Physics, Renaissance, DNA" 
+            />
             <div className="examples-container">
               {EXAMPLES.map(ex=>(
                 <button key={ex} onClick={()=>handleSearch(ex)} className="example-btn">
@@ -101,13 +99,11 @@ export default function Explore() {
           </nav>
 
           <div className="mini-search-container">
-            <div className="mini-search-bar">
-              <span className="search-icon">⌕</span>
-              <input className="search-input" value={query} onChange={e=>setQuery(e.target.value)} onKeyDown={e=>e.key==="Enter"&&handleSearch()} placeholder="New topic" />
-              <button className="mini-search-btn" onClick={()=>handleSearch()}>
-                Go
-              </button>
-            </div>
+            <Search 
+              onSearch={handleSearch} 
+              mini={true} 
+              placeholder="From atoms to art—start your journey" 
+            />
           </div>
         </>
       )}

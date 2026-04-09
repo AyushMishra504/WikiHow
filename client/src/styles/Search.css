@@ -1,0 +1,99 @@
+.search-box {
+  position: relative;
+  width: 100%;
+}
+
+/* Ensure the Search component matches the layout from Explore.jsx */
+.search-input-wrapper {
+  display: flex; 
+  align-items: center; 
+  gap: 0.75rem; 
+  padding: 0.3rem 0.4rem 0.3rem 1.2rem;
+  border: 1.5px solid rgba(196,168,130,0.2); 
+  background: rgba(26,26,26,0.82);
+  border-radius: 50px; 
+  backdrop-filter: blur(12px); 
+  transition: all 0.25s ease;
+  width: 100%;
+}
+
+.search-input-wrapper:hover, .search-input-wrapper:focus-within {
+  border-color: rgba(196,168,130,0.5); 
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.search-input {
+  flex: 1; 
+  background: transparent; 
+  border: none; 
+  outline: none; 
+  color: #f0ebe3;
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 0.85rem; 
+  font-weight: 300; 
+  padding: 0.75rem 0;
+  cursor: text;
+}
+
+.search-btn, .mini-search-btn {
+  border: 1px solid rgba(196,168,130,0.35); 
+  background: rgba(196,168,130,0.08); 
+  color: #f0ebe3;
+  padding: 0.6rem 1.2rem; 
+  border-radius: 40px; 
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem; 
+  cursor: pointer; 
+  transition: all 0.2s; 
+  text-transform: uppercase; 
+  letter-spacing: 0.05em;
+}
+
+.search-btn:hover, .mini-search-btn:hover {
+  background: #c4a882; 
+  color: #1a1a1a;
+}
+
+.mini-search-btn {
+  padding: 0.4rem 1rem;
+}
+
+/* Dropdown */
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.5rem;
+  background: rgba(20, 20, 20, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(196, 168, 130, 0.25);
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 1000;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  list-style: none;
+  padding: 0.5rem 0;
+}
+
+.search-dropdown-item {
+  padding: 0.7rem 1.2rem;
+  color: #f0ebe3;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.search-dropdown-item:hover, .search-dropdown-item.active {
+  background: rgba(196, 168, 130, 0.15);
+  color: #c4a882;
+}
+
+.search-dropdown-icon {
+  font-size: 0.8rem;
+  color: rgba(196, 168, 130, 0.5);
+}
