@@ -6,7 +6,7 @@ import GraphRightPanel from './GraphRightPanel';
 import GraphOverlay from './GraphOverlay';
 import GraphFooter from './GraphFooter';
 
-const Graph = forwardRef(({ fetchNodeData, onGoHome }, ref) => {
+const Graph = forwardRef(({ fetchNodeData, topicDetails, onGoHome }, ref) => {
   const canvasRef = useRef(null);
   const [stats, setStats] = useState({ nodes: 0, edges: 0, depth: 0 });
   const [panelConnections, setPanelConnections] = useState([]);
@@ -115,7 +115,7 @@ const Graph = forwardRef(({ fetchNodeData, onGoHome }, ref) => {
         onCollapseEnd={handleCollapseEnd}
       />
       <GraphSidebar history={history} currentIndex={currentIndex} onHistoryClick={handleHistoryClick} currentNode={currentNode} />
-      <GraphNodeInfo nodeLabel={currentNode} />
+      <GraphNodeInfo nodeLabel={currentNode} topicDetails={topicDetails} />
       <GraphRightPanel stats={stats} panelConnections={panelConnections} rootTopic={rootTopic} currentNode={currentNode} onPanelClick={handlePanelClick} />
       <GraphOverlay nodeLabels={nodeLabels} loading={loading} />
       {history.length > 0 && <GraphFooter stats={stats} />}

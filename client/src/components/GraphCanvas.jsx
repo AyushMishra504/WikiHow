@@ -319,10 +319,13 @@ const GraphCanvas = forwardRef(
         node.expanded = true;
         if (node.depth + 1 > maxDepth) maxDepth = node.depth + 1;
         onLoading?.(true);
-        // Small artificial delay to allow UI to render spinner before main thread work
-        await new Promise((r) => setTimeout(r, 10));
 
-        const related = fetchNodeData(node.label) || [];
+        let related = [];
+        try {
+          related = (await fetchNodeData(node.label)) || [];
+        } catch (err) {
+          console.error("Failed to fetch node data:", err);
+        }
         onLoading?.(false);
 
         for (let i = 0; i < related.length; i++) {

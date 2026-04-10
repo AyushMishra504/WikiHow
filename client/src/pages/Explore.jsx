@@ -1,40 +1,63 @@
 import { useState, useRef, useCallback } from "react";
-import { knowledgeDB, EXAMPLES, RANDOM_TOPICS } from "../utils/knowledge";
+import { EXAMPLES, RANDOM_TOPICS } from "../utils/knowledge";
 import Graph from "../components/Graph";
 import Search from "../components/Search";
 import "../styles/Explore.css";
 
-// ── Knowledge DB Fetcher ──────────────────────────────────────────────────────────────
+// ── Wikipedia API Fetcher ──────────────────────────────────────────────────────────────
 
-function fetchRelated(topic) {
-  const key = topic.toLowerCase();
-  if (knowledgeDB[key]) return knowledgeDB[key];
-  const general = ["History","Science","Mathematics","Culture","Technology","Society","Art","Nature","Physics","Biology","Chemistry","Literature","Music","Economics"];
-  const seed = topic.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
-  const results = [];
-  for (let i = 0; i < 6; i++) {
-    const idx = (seed * (i + 1) * 7) % general.length;
-    const t = general[idx];
-    if (!results.includes(t) && t.toLowerCase() !== key) results.push(t);
+const API_BASE = "http://localhost:5000";
+
+async function fetchRelated(topic) {
+  try {
+      const res = await fetch(`${API_BASE}/api/wiki/getData/${encodeURIComponent(topic)}`);
+    if (!res.ok){
+      console.log(res);
+       throw new Error("API error");
+    }
+    const data = await res.json();
+    return {
+      links: (data.links || []).slice(0, 6),
+      pageData: data.pageData || { title: topic, extract: "", image: null },
+    };
+  } catch (err) {
+    console.error("Failed to fetch topic:", topic, err);
+    return {
+      links: [],
+      pageData: { title: topic, extract: "Could not load data for this topic.", image: null },
+    };
   }
-  return results;
 }
 
 export default function Explore() {
   const graphRef = useRef(null);
   const [isExploring, setIsExploring] = useState(false);
   const [query, setQuery] = useState("");
+  const [topicDetails, setTopicDetails] = useState({});
+
+  // Wraps the async fetcher so it: (1) returns links for the graph, (2) caches pageData
+  const fetchNodeData = useCallback(async (topic) => {
+    const result = await fetchRelated(topic);
+    // Cache the pageData for the info panel
+    setTopicDetails((prev) => ({
+      ...prev,
+      [topic.toLowerCase()]: result.pageData,
+    }));
+    return result.links;
+  }, []);
 
   const handleSearch = useCallback((topic) => {
     const t = topic || query; 
     if (!t.trim()) return;
     setQuery(""); 
+    setTopicDetails({});
     setIsExploring(true);
     graphRef.current?.startExploration(t);
   }, [query]);
 
   const handleRandom = () => {
     const topic = RANDOM_TOPICS[Math.floor(Math.random() * RANDOM_TOPICS.length)];
+    setTopicDetails({});
     setIsExploring(true);
     graphRef.current?.startExploration(topic);
   };
@@ -45,13 +68,15 @@ export default function Explore() {
 
   const handleCollapseEnd = () => {
     setIsExploring(false);
+    setTopicDetails({});
   };
 
   return(
     <div className="explore-container">
       <Graph 
         ref={graphRef}
-        fetchNodeData={fetchRelated}
+        fetchNodeData={fetchNodeData}
+        topicDetails={topicDetails}
         onGoHome={handleCollapseEnd}
       />
 

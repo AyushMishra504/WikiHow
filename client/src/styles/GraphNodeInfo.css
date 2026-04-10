@@ -1,38 +1,122 @@
-/* Node info — bottom left, above footer, doesn't crowd center */
+/* Node info — bottom left, above footer */
 .graph-node-info {
   position: fixed;
   left: 1.5rem;
   bottom: 5rem;
-  width: 200px;
+  width: 260px;
+  max-height: 420px;
   z-index: 25;
   pointer-events: auto;
-  background: rgba(26,26,26,0.84);
-  border: 1px solid rgba(196,168,130,0.18);
-  backdrop-filter: blur(14px);
-  border-radius: 10px;
-  padding: 1rem;
+  background: rgba(26, 26, 26, 0.88);
+  border: 1px solid rgba(196, 168, 130, 0.18);
+  backdrop-filter: blur(18px);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  overflow-y: auto;
+  animation: nodeInfoSlideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes nodeInfoSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.graph-node-info::-webkit-scrollbar {
+  width: 3px;
+}
+.graph-node-info::-webkit-scrollbar-thumb {
+  background: rgba(196, 168, 130, 0.2);
+  border-radius: 4px;
 }
 
 .node-info-eyebrow {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.5rem;
   letter-spacing: 0.12em;
-  color: rgba(196,168,130,0.5);
+  color: rgba(196, 168, 130, 0.5);
   text-transform: uppercase;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.6rem;
+}
+
+/* Thumbnail */
+.node-info-image-wrapper {
+  width: 100%;
+  height: 130px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(196, 168, 130, 0.12);
+}
+
+.node-info-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.node-info-image-wrapper:hover .node-info-image {
+  transform: scale(1.05);
 }
 
 .node-info-title {
   font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: #c4a882;
-  margin-bottom: 0.5rem;
-  line-height: 1.2;
+  margin-bottom: 0.45rem;
+  line-height: 1.25;
 }
 
 .node-info-content {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.72rem;
-  color: rgba(196,168,130,0.7);
-  line-height: 1.5;
+  color: rgba(196, 168, 130, 0.7);
+  line-height: 1.6;
+}
+
+/* Skeleton loading */
+.node-info-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.25rem;
+}
+
+.skeleton-title,
+.skeleton-line {
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(196, 168, 130, 0.08) 25%,
+    rgba(196, 168, 130, 0.16) 50%,
+    rgba(196, 168, 130, 0.08) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-title {
+  width: 70%;
+  height: 18px;
+}
+
+.skeleton-line {
+  width: 100%;
+  height: 10px;
+}
+
+.skeleton-line.short {
+  width: 60%;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
